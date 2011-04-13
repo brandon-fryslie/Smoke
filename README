@@ -3,6 +3,12 @@ Smoke v0.0.1
 
 A reinterpretation of the Code Igniter 2.0.2 framework
 
+Note: this is based entirely off the Code Igniter 2.0.2 framework.
+Even the Smoke.class.php file is just a hacked apart and reorganzied version
+of the bootstrapper index.php + system/core/CodeIgniter.php
+
+Kudos to those guys!
+
 ---
 
 Code Igniter is great, but it doesn't fit every situation.  CI is overkill for sites that only need to be one simple form, and can't be used on pre-existing sites.  For these situations, you don't need Code Igniter.  
@@ -13,7 +19,7 @@ You just need Smoke.
 
 Design Goals:
 
-Allow usage of Code Igniter libraries and helpers outside of the context of a Code Igniter controller without any modifications to any of the core classes, libraries, or helpers.
+Allow usage of Code Igniter libraries and helpers outside of the context of a Code Igniter controller without any modifications to the core classes, libraries, or helpers.
 
 ---
 
@@ -21,10 +27,11 @@ Rather than tell you what it does (read the CI docs for that), I will explain wh
 
 Caching
 Routing
-Send Headers (output will already be sent)
+Send Headers (output will already be sent so you get an error)
 Database (Will fix)
 Hooks
 Controllers
+Subclassing/User prefixes/Separation of System VS Application files
 
 Models may not work (they are untested)
 
