@@ -43,8 +43,8 @@ $active_record = TRUE;
 
 $db["default"]["hostname"] = "localhost";
 $db["default"]["username"] = "root";
-$db["default"]["password"] = "Ws3Qa2ii";
-$db["default"]["database"] = "styler";
+$db["default"]["password"] = "";
+$db["default"]["database"] = "";
 $db["default"]["dbdriver"] = "mysql";
 $db["default"]["dbprefix"] = "";
 $db["default"]["pconnect"] = FALSE;

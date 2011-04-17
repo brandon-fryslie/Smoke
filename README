@@ -1,5 +1,5 @@
 
-Smoke v0.0.1
+Smoke v0.0.2
 
 A reinterpretation of the Code Igniter 2.0.2 framework
 
@@ -23,19 +23,73 @@ Allow usage of Code Igniter libraries and helpers outside of the context of a Co
 
 ---
 
-Rather than tell you what it does (read the CI docs for that), I will explain what it CAN'T do.  Some of the code is still in there for pieces of these, but using them or things that rely on them may not work as expected right now.
+What you can do:  
+* You can load (almost) any Code Igniter library and use it in your code right away.
+* You can load any Code Igniter helper and use it in your code right away.
 
-Caching
-Routing
-Send Headers (output will already be sent so you get an error)
-Database (Will fix)
-Hooks
-Controllers
-Subclassing/User prefixes/Separation of System VS Application files
+---
 
-Models may not work (they are untested)
+At any time you can access Smoke like this: smoke()->foo
+
+Only one instance is ever created and that instance is returned by calling smoke()
+(This means you don't call 'new Smoke' ever, just call smoke() whenver you need to use it)
+
+To use smoke in a string, you need to use $smoke.  This is a global variable, and is set the first time you
+call smoke()
+
+Then use it like this: echo "<h2>Calendar</h2>$smoke->calendar->generate()";
+
+---
+
+Now Libraries will be auto-loaded when you try to use them. 
+
+If you call smoke()->calendar->generate(), it will just work
+You don't have to call smoke()->load->library('calendar') anymore (but you can if you want)
+
+---
+
+There are several global functions Smoke / Code Igniter provides that are useful:
+
+log_message($level = 'error', $message, $php_error = FALSE)
+show_error($message, $status_code = 500, $heading = 'An Error Was Encountered')
+
+There are more defined in resources/core/Common.php
+
+---
+
+Here is a quick demo of typical usage:
+
+require_once('Smoke.class.php');
+
+// This is not necessary since libraries are auto loaded
+// smoke()->load->library('calendar');
+
+$out = <<< HTML
+<p>
+	<h2>This Month</h2> 
+	{$smoke->calendar->generate()}
+</p>
+
+smoke()->out($out);
+smoke()->display();
+
+See the examples/ folder for more information.
+
+---
+
+Now I will explain what it can't do.  Using functions related to these things may not work as expected.  I will eventually remove all of these things.
+
+Caching - Smarty has better caching anyway
+Routing - You get to route it yourself!
+Hooks - I will remove all of this to make it leaner
+Controllers - I may get these working someday
+Subclassing/User prefixes/Separation of System VS Application files - Removed to make it leaner
+
+Models should work right but they are untested
 
 Anything else should be working, so send me an email if anything doesn't!
+
+bmf@email.arizona.edu
 
 ---
 

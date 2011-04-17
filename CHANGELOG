@@ -1,0 +1,12 @@
+0.0.2
+---
+Added examples for benchmark, calendar, cart, db, form_validation, and table libraries
+Added smarty->display_str($str) to use a string as a smarty template
+Added comments to some stuff
+Database class is working
+Made $smoke->out($s) append to a buffer, then $smoke->display() to show it
+Made $smoke->display($s) directly output $s
+
+0.0.1
+---
+Got everything somewhat working

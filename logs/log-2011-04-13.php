@@ -1297,3 +1297,43 @@ DEBUG - 2011-04-13 11:15:48 --> Language file loaded: language/english/calendar_
 DEBUG - 2011-04-13 11:15:48 --> Calendar Class Initialized
 DEBUG - 2011-04-13 11:15:48 --> Final output sent to browser
 DEBUG - 2011-04-13 11:15:48 --> Total execution time: 0.0125
+DEBUG - 2011-04-13 19:58:37 --> Config Class Initialized
+DEBUG - 2011-04-13 19:58:37 --> Utf8 Class Initialized
+DEBUG - 2011-04-13 19:58:37 --> UTF-8 Support Enabled
+DEBUG - 2011-04-13 19:58:37 --> Output Class Initialized
+DEBUG - 2011-04-13 19:58:37 --> Config Class Initialized
+DEBUG - 2011-04-13 19:58:37 --> URI Class Initialized
+DEBUG - 2011-04-13 19:58:37 --> Router Class Initialized
+DEBUG - 2011-04-13 19:58:37 --> Loader Class Initialized
+DEBUG - 2011-04-13 19:58:37 --> URI Class Initialized
+DEBUG - 2011-04-13 19:58:37 --> Security Class Initialized
+DEBUG - 2011-04-13 19:58:37 --> Input Class Initialized
+DEBUG - 2011-04-13 19:58:37 --> Global POST and COOKIE data sanitized
+DEBUG - 2011-04-13 19:58:37 --> Language Class Initialized
+DEBUG - 2011-04-13 19:58:37 --> Controller Class Initialized
+DEBUG - 2011-04-13 19:58:37 --> Helper loaded: form_helper
+DEBUG - 2011-04-13 19:58:37 --> Form Validation Class Initialized
+DEBUG - 2011-04-13 19:58:37 --> Language file loaded: language/english/calendar_lang.php
+DEBUG - 2011-04-13 19:58:37 --> Calendar Class Initialized
+DEBUG - 2011-04-13 19:58:37 --> Final output sent to browser
+DEBUG - 2011-04-13 19:58:37 --> Total execution time: 0.1004
+DEBUG - 2011-04-13 19:58:58 --> Config Class Initialized
+DEBUG - 2011-04-13 19:58:58 --> Utf8 Class Initialized
+DEBUG - 2011-04-13 19:58:58 --> UTF-8 Support Enabled
+DEBUG - 2011-04-13 19:58:58 --> Output Class Initialized
+DEBUG - 2011-04-13 19:58:58 --> Config Class Initialized
+DEBUG - 2011-04-13 19:58:58 --> URI Class Initialized
+DEBUG - 2011-04-13 19:58:58 --> Router Class Initialized
+DEBUG - 2011-04-13 19:58:58 --> Loader Class Initialized
+DEBUG - 2011-04-13 19:58:58 --> URI Class Initialized
+DEBUG - 2011-04-13 19:58:58 --> Security Class Initialized
+DEBUG - 2011-04-13 19:58:58 --> Input Class Initialized
+DEBUG - 2011-04-13 19:58:58 --> Global POST and COOKIE data sanitized
+DEBUG - 2011-04-13 19:58:58 --> Language Class Initialized
+DEBUG - 2011-04-13 19:58:58 --> Controller Class Initialized
+DEBUG - 2011-04-13 19:58:58 --> Helper loaded: form_helper
+DEBUG - 2011-04-13 19:58:58 --> Form Validation Class Initialized
+DEBUG - 2011-04-13 19:58:58 --> Language file loaded: language/english/calendar_lang.php
+DEBUG - 2011-04-13 19:58:58 --> Calendar Class Initialized
+DEBUG - 2011-04-13 19:58:58 --> Final output sent to browser
+DEBUG - 2011-04-13 19:58:58 --> Total execution time: 0.0122

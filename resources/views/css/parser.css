@@ -1,0 +1,40 @@
+
+body {
+	background-color: #799DB6;
+}
+
+#wrapper {
+	width: 1200px;
+}
+
+.content {
+	text-align: center;
+	margin: 50px;
+	width: 500px;
+	margin-left: auto;
+	margin-right: auto;
+	border: 1px solid;
+	background-color: #CFECFB;
+	padding: 10px;
+	border-radius: 5px;
+}
+
+.content table {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.content td, th {
+	padding: 5px;
+	border: 1px solid;
+}
+
+.content h2 {
+	border-bottom: 1px dashed;
+}
+
+#options {
+	margin: 10px;
+	padding: 10px;
+	border: 1px solid;
+}

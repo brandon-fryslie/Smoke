@@ -233,6 +233,8 @@ class CI_Config {
 	 */
 	function site_url($uri = '')
 	{
+		return $this->slash_item('base_url').$uri;
+		
 		if ($uri == '')
 		{
 			return $this->slash_item('base_url').$this->item('index_page');
@@ -265,7 +267,7 @@ class CI_Config {
 				$uri = $str;
 			}
 
-			return $this->slash_item('base_url').$this->item('index_page').'?'.$uri;
+			// return $this->slash_item('base_url').$this->item('index_page').'?'.$uri;
 		}
 	}
 

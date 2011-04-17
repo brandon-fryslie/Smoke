@@ -1,5 +1,8 @@
 <?php 
 
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
+
 require_once('Smoke.class.php');
 require_once('misc/dBug.php');
 
@@ -37,7 +40,7 @@ $smoke->load->library(array(
 	// 'Encrypt',
 	// 'Upload',
 	// 'FTP',
-	// 'Table',
+	'Table',
 	// 'Image_lib',
 	// 'Javascript',
 	// 'Pagination',
@@ -54,44 +57,11 @@ $smoke->form_validation->set_rules('username', 'Username', 'required');
 
 $smoke->benchmark->mark('code_start');
 
-// $smoke->load->database();
+$smoke->load->database();
 
-// phpinfo();
+$res = smoke()->db->get('otu_summary_97', 20);
 
-// $query = $this->db->query('SELECT name, title, email FROM my_table');
-
-// foreach ($query->result() as $row)
-// {
-//     echo $row->title;
-//     echo $row->name;
-//     echo $row->email;
-// }
-
-// echo 'Total Results: ' . $query->num_rows();
-
-$out = '';
-
-if ($smoke->form_validation->run() == FALSE)
-{
-	$out .= validation_errors();
-	$out .= form_open();
-	$out .= form_input('username');
-	$out .= form_submit('Send');
-	$out .= form_close();
-	
-	$out .= "Failed!<br>";
-	
-	$smoke->benchmark->mark('code_end');
-	
-	$out .= "Time Elapsed: {$smoke->benchmark->elapsed_time('code_start', 'code_end')}<br>";
-	$out .= "Mem Usage: {$smoke->benchmark->memory_usage()}<br>";
-} else {
-	
-	$out .= "Success!";
-	
-}
-
-echo $smoke->calendar->generate(2006, 6);
+$out = smoke()->table->generate($res->result_array());
 
 $smoke->out($out);
 $smoke->display();

@@ -19,7 +19,23 @@ define('BASEPATH', SMOKEPATH.'resources/');
 define('APPPATH', BASEPATH);
 define('EXT', '.php'); // CI Likes this to be there
 
-function &get_instance() { return Smoke::get_instance(); }
+require_once(SMOKEPATH.'resources/core/Common'.EXT);
+require_once(SMOKEPATH.'misc/dbug'.EXT);
+require_once(APPPATH.'config/constants'.EXT);
+set_error_handler('_exception_handler');
+
+function &get_instance() { 
+	$obj = Smoke::get_instance();
+	$obj = ($obj == NULL) ? new Smoke : $obj;
+	return $obj;
+}
+
+function &smoke ()
+{
+	$obj = Smoke::get_instance();
+	$obj = ($obj == NULL) ? new Smoke : $obj;
+	return $obj;
+}
 
 class Smoke {
 
@@ -31,13 +47,13 @@ class Smoke {
 	public function __construct()
 	{	
 		self::$instance =& $this;
+		
+		global $smoke;
+		$smoke = get_instance();
 
 		// Include common functions
-		require_once(SMOKEPATH.'resources/core/Common'.EXT);
-		require_once(SMOKEPATH.'misc/dBug'.EXT);
-		require_once(APPPATH.'config/constants'.EXT);
-		
-		set_error_handler('_exception_handler');
+		if (!class_exists('dBug')) { require_once(SMOKEPATH.'misc/dBug'.EXT); }
+				
 		if (!is_php('5.3')) { @set_magic_quotes_runtime(0); } // Kill magic quotes
 
 		// Set a liberal script execution time limit
@@ -45,23 +61,23 @@ class Smoke {
 
 		// Some stuff needs these like this
 		global $CFG; // UTF-8 class needs this
-		$CFG = $this->config = $this->load_class('Config'); 
+		$CFG = $this->config = load_class('Config', 'core'); 
 
 		global $UNI; // Input class needs this
-		$UNI = $this->load_class('Utf8'); 
+		$UNI = $this->utf8 =  load_class('Utf8', 'core'); 
 		
 		global $BM; // Input class needs this
-		$BM = $this->benchmark = $this->load_class('Benchmark');
+		$BM = $this->benchmark = load_class('Benchmark', 'core');
 		
 		$BM->mark('total_execution_time_start');
 		
 		global $OUT;
-		$OUT = $this->output = $this->load_class('Output');
+		$OUT = $this->output = load_class('Output', 'core');
 		
 		global $RTR;
-		$RTR = $this->router = $this->load_class('Router');
+		$RTR = $this->router = load_class('Router', 'core');
 				
-		$this->load = $this->load_class('Loader');
+		$this->load = load_class('Loader', 'core');
 		
 		/* Init Core Classes */
 		$classes = array(
@@ -73,57 +89,22 @@ class Smoke {
 				
 		foreach ($classes as $class) { 
 			$class = strtolower($class);
-			$this->$class = $this->load_class($class); 
+			$this->$class = load_class($class, 'core'); 
 		}
-
+		
+		define('BASEURL', config_item('base_url'));
 
 		log_message('debug', "Controller Class Initialized");
 	}
+	
+	public function __get($name) {
+		if ($name == 'db') { $this->load->database(); }
+		else { $this->load->library($name); }
+		return $this->$name;
+	}
 
 	// ------------------------------------------------------------------------
-	
-	/**
-	* Class registry
-	*
-	* This function acts as a singleton.  If the requested class does not
-	* exist it is instantiated and set to a static variable.  If it has
-	* previously been instantiated the variable is returned.
-	*
-	* @access	public
-	* @param	string	the class name being requested
-	* @param	string	the directory where the class should be found
-	* @param	string	the class name prefix
-	* @return	object
-	*/
-	
-	function &load_class($class, $prefix = 'CI_')
-	{
-		// Does the class exist?  If so, we're done...
-		if (isset($this->classes[$class])) { return $this->classes[$class]; }
-	
-		$name = FALSE;
-	
-		foreach (array('core/', 'libraries/', 'helpers/', 'models/') as $dir) {
-			if (file_exists(SMOKEPATH.'resources/'.$dir.$class.EXT)) { 
-				$name = $prefix.$class; 
-				break;
-			}
-		} 
-		
-		if (class_exists($name) === FALSE) { require_once(SMOKEPATH.'resources/'.$dir.$class.EXT); }
-	
-		// Did we find the class?
-		if ($name === FALSE)
-		{
-			// Note: We use exit() rather then show_error() in order to avoid a
-			// self-referencing loop with the Excptions class
-			exit('Unable to locate the specified class: '.$class.EXT);
-		}
-		
-		$this->classes[$class] = new $name();
-		return $this->classes[$class];
-	}
-	
+
 	public static function &get_instance()
 	{
 		return self::$instance;
@@ -132,14 +113,16 @@ class Smoke {
 	public function out ($s)
 	{
 		global $OUT;
-		$OUT->set_output($s);
+		$OUT->append_output($s);
 	}
 	
-	public function display ()
+	public function display ($s = '')
 	{
 		global $BM, $OUT;
 		$BM->mark('total_execution_time_end');
-		$OUT->_display();
+		if ($s == '') { $OUT->_display(); } 
+		else { $OUT->set_output($s); $OUT->_display(); }
+		
 	}
 }
 // END Controller class

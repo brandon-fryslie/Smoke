@@ -284,7 +284,7 @@
 * @return	void
 */
 	function show_error($message, $status_code = 500, $heading = 'An Error Was Encountered')
-	{
+	{		
 		$_error =& load_class('Exceptions', 'core');
 		echo $_error->show_error($heading, $message, 'error_general', $status_code);
 		exit;
@@ -344,7 +344,8 @@
  * @return	void
  */
 	function set_status_header($code = 200, $text = '')
-	{
+	{	
+		log_message('debug', "Setting Status Header: $code");
 		$stati = array(
 							200	=> 'OK',
 							201	=> 'Created',
@@ -447,11 +448,15 @@
 		}
 
 		$_error =& load_class('Exceptions', 'core');
+		// TODO Remove this
+		$_error->show_php_error($severity, $message, $filepath, $line);
+		exit;
 
 		// Should we display the error? We'll get the current error_reporting
 		// level and add its bits with the severity bits to find out.
 		if (($severity & error_reporting()) == $severity)
 		{
+			// echo "<br><br>showing error $message<br><br>";
 			$_error->show_php_error($severity, $message, $filepath, $line);
 		}
 
